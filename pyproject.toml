@@ -1,0 +1,18 @@
+[project]
+name = "llamachat-backend"
+version = "0.1.0"
+description = "My custom llama-stack distribution descriptor file"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=4.0.0",
+    "faiss-cpu>=1.12.0",
+    "greenlet>=3.2.4",
+    "llama-stack==0.2.22",
+    "mcp>=1.12.4",
+    "ollama>=0.5.3",
+    "protobuf>=6.31.1",
+    "pymilvus==2.6.1",
+    "sentence-transformers>=5.1.1",
+    "sqlalchemy>=2.0.43",
+]
