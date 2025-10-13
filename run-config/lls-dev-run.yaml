@@ -85,7 +85,7 @@ providers:
       config:
         kvstore:
           type: sqlite
-          db_path: ${emv.SQLITE_STORE_DIR:=~/.llama/distributions/lls-dev-stack}/hf_datasetio.db
+          db_path: ${env.SQLITE_STORE_DIR:=~/.llama/distributions/lls-dev-stack}/hf_datasetio.db
     - provider_id: localfs
       provider_type: inline::localfs
       config:
