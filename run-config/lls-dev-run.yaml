@@ -11,6 +11,7 @@ apis:
 - files
 - tool_runtime
 - vector_io
+- telemetry
 
 # Provider Configuration
 providers:
@@ -168,6 +169,9 @@ vector_stores:
 
 safety:
   default_shield_id: llama-guard
+
+telemetry:
+  enabled: True
 
 # ENDPOINT SETTINGS
 server:
