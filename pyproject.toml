@@ -8,7 +8,7 @@ dependencies = [
     "datasets>=4.0.0",
     "faiss-cpu>=1.12.0",
     "greenlet>=3.2.4",
-    "llama-stack==0.4.0",
+    "llama-stack==0.4.2",
     "mcp>=1.12.4",
     "ollama>=0.5.3",
     "opentelemetry-exporter-otlp-proto-http>=1.36.0",
