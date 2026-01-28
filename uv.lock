@@ -797,7 +797,7 @@ wheels = [
 
 [[package]]
 name = "llama-stack"
-version = "0.4.2"
+version = "0.4.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -830,25 +830,26 @@ dependencies = [
     { name = "urllib3" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/58/8c/c47416e024ed0791583e7ab499289d7326afe5a50c26c181b77424610105/llama_stack-0.4.2.tar.gz", hash = "sha256:38caaed133139c1de8c4ef2d352f562c98d7a2797f97f2e4558015762787b20e", size = 3353750, upload-time = "2026-01-16T14:18:10.404Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/57/f8/b46c825c7d4050524ca4da9ff7f2622b101044f65cf50f708cf5b6ac935d/llama_stack-0.4.3.tar.gz", hash = "sha256:70d379ae9dbb5b1d0693f14054d9817aba183ffcd805133f0a4442baee132c6d", size = 3357773, upload-time = "2026-01-26T21:46:01.588Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/58/fd/b4c51a12ac4d8db1985ba6870fc175797a46f25b910f621312d772a80d72/llama_stack-0.4.2-py3-none-any.whl", hash = "sha256:f4dbd043704d5e3b382a3fba690536b54baa58ae8ec27dae3ceba8ec7a377427", size = 3691482, upload-time = "2026-01-16T14:18:08.651Z" },
+    { url = "https://files.pythonhosted.org/packages/f2/eb/a4c6c6e6391e13b7d71a116df847b13c334355e9ec18441635140b8fbe1f/llama_stack-0.4.3-py3-none-any.whl", hash = "sha256:423207eae2b640894992a9075ff9dd6300ff904ab06a49fe38cfe0bb809d4669", size = 3695786, upload-time = "2026-01-26T21:45:59.607Z" },
 ]
 
 [[package]]
 name = "llama-stack-api"
-version = "0.4.0"
+version = "0.4.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "fastapi" },
     { name = "jsonschema" },
+    { name = "openai" },
     { name = "opentelemetry-exporter-otlp-proto-http" },
     { name = "opentelemetry-sdk" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/61/8f/1ba6994f1637a5117fa6101b932e59048c9f49d0d999ac607740468ac895/llama_stack_api-0.4.0.tar.gz", hash = "sha256:8b18471e4f8d1ce6b3fb34026ef2150d681f1b8d012e09e7fbbf15493375c6e0", size = 3514, upload-time = "2026-01-06T21:15:47.509Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0c/a5/ffc5cc66c3375df652dc3b03f9303923e9cd5dd7dd80fbef4d98e5a43e13/llama_stack_api-0.4.3.tar.gz", hash = "sha256:89cf8eaf1468b50ac426e14d39beb4f93994e0807b857f729765e4af0e9b53a1", size = 3165, upload-time = "2026-01-26T21:46:05.086Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/48/1f/7287ba576de6e94a05158f0e78b772355ce91bfa183d5a4899947f42f5dd/llama_stack_api-0.4.0-py3-none-any.whl", hash = "sha256:de7b5bd972d2f2e188534575e13fbf9ce8d93cdd3bf6a3de99a7a8cee878ed06", size = 2604, upload-time = "2026-01-06T21:15:46.424Z" },
+    { url = "https://files.pythonhosted.org/packages/ea/14/b228262ed1c715a3163616da87071c695dc1c13036e8ea7222b88fc9a39d/llama_stack_api-0.4.3-py3-none-any.whl", hash = "sha256:f6c3e4d81d27a3332983a44f9295567e375136d4a402084958ed247f5676c1ee", size = 2614, upload-time = "2026-01-26T21:46:04.319Z" },
 ]
 
 [[package]]
@@ -860,6 +861,7 @@ dependencies = [
     { name = "faiss-cpu" },
     { name = "greenlet" },
     { name = "llama-stack" },
+    { name = "llama-stack-api" },
     { name = "mcp" },
     { name = "ollama" },
     { name = "opentelemetry-exporter-otlp-proto-http" },
@@ -875,7 +877,8 @@ requires-dist = [
     { name = "datasets", specifier = ">=4.0.0" },
     { name = "faiss-cpu", specifier = ">=1.12.0" },
     { name = "greenlet", specifier = ">=3.2.4" },
-    { name = "llama-stack", specifier = "==0.4.2" },
+    { name = "llama-stack", specifier = "==0.4.3" },
+    { name = "llama-stack-api", specifier = "==0.4.3" },
     { name = "mcp", specifier = ">=1.12.4" },
     { name = "ollama", specifier = ">=0.5.3" },
     { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.36.0" },
