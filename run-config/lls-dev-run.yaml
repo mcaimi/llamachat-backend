@@ -4,14 +4,16 @@ image_name: lls-dev-stack
 
 # Enabled APIs
 apis:
+- admin
 - agents
-- inference
 - datasetio
-- safety
+- eval
 - files
+- inference
+- safety
+- scoring
 - tool_runtime
 - vector_io
-- telemetry
 
 # Provider Configuration
 providers:
@@ -23,9 +25,15 @@ providers:
       config:
         url: ${env.INFERENCE_URL:=http://localhost:11434}
         refresh_models: False
+        allowed_models: []
     - provider_id: sentence-transformers
       provider_type: inline::sentence-transformers
       config: {}
+    - provider_id: vllm-model-remote
+      provider_type: remote::vllm
+      config:
+        base_url: ${env.VLLM_ENDPOINT}
+        api_token: ${env.VLLM_APITOKEN}
 
   # Vector IO Providers
   vector_io:
@@ -168,10 +176,7 @@ vector_stores:
     model_id: nomic-embed-text:latest
 
 safety:
-  default_shield_id: llama-guard
-
-telemetry:
-  enabled: True
+  default_shield_id: LlamaGuard-3
 
 # ENDPOINT SETTINGS
 server:
