@@ -37,12 +37,12 @@ providers:
 
   # Vector IO Providers
   vector_io:
-    - provider_id: inline-milvus
-      provider_type: inline::milvus
+    - provider_id: inline-chromadb
+      provider_type: inline::chromadb
       config:
-        db_path: ${env.MILVUS_DB_PATH:=~/.llama/distributions/lls-dev-stack}/milvus.db
+        db_path: ${env.CHROMA_DB_PATH:=~/.llama/distributions/lls-dev-stack}/chromadb.db
         persistence:
-          namespace: vector_io::milvus
+          namespace: vector_io::chromadb
           backend: kv_default
     - provider_id: inline-faiss
       provider_type: inline::faiss

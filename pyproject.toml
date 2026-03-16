@@ -3,19 +3,14 @@ name = "llamachat-backend"
 version = "0.1.0"
 description = "My custom llama-stack distribution descriptor file"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
-    "datasets>=4.0.0",
-    "faiss-cpu>=1.12.0",
-    "greenlet>=3.2.4",
-    "llama-stack==0.5.1",
-    "llama-stack-api==0.5.1",
-    "mcp>=1.12.4",
-    "ollama>=0.5.3",
-    "opentelemetry-exporter-otlp-proto-http>=1.36.0",
-    "opentelemetry-sdk>=1.36.0",
-    "protobuf>=6.31.1",
-    "pymilvus>=2.6.1",
-    "sentence-transformers>=5.1.1",
-    "sqlalchemy>=2.0.43",
+    "chardet>=7.1.0",
+    "chromadb>=1.5.5",
+    "faiss-cpu>=1.13.2",
+    "llama-stack==0.6.0",
+    "llama-stack-api==0.6.0",
+    "ollama>=0.6.1",
+    "pypdf>=6.9.0",
+    "torch>=2.10.0",
 ]
