@@ -5,10 +5,11 @@ image_name: lls-dev-stack
 # Enabled APIs
 apis:
 - admin
-- agents
+- responses
 - datasetio
 - eval
 - files
+- file_processors
 - inference
 - safety
 - scoring
@@ -59,11 +60,7 @@ providers:
         excluded_categories: []
     - provider_id: code-scanner
       provider_type: inline::code-scanner
-#    - provider_id: prompt-guard
-#      provider_type: inline::prompt-guard
-#      config:
-#        guard_type: injection
-#
+ 
   # Files Backend
   files:
     - provider_type: inline::localfs
@@ -74,18 +71,23 @@ providers:
           backend: sql_default
           table_name: files_metadata
 
+  # file processors
+  file_processors:
+    - provider_id: pypdf
+      provider_type: inline::pypdf
+
   # Agentic Backend Provider
-  agents:
-    - provider_id: meta-reference
-      provider_type: inline::meta-reference
+  responses:
+    - provider_id: builtin
+      provider_type: inline::builtin
       config:
         persistence:
           agent_state:
-            backend: kv_default
             namespace: agents
+            backend: kv_default
           responses:
-            backend: sql_default
             table_name: responses
+            backend: sql_default
             max_write_queue_size: 10000
             num_writers: 4
 
@@ -105,8 +107,8 @@ providers:
           namespace: datasetio::localfs
 
   tool_runtime:
-    - provider_id: rag-runtime
-      provider_type: inline::rag-runtime
+    - provider_id: file-search
+      provider_type: inline::file-search
       config: {}
     - provider_id: web-search
       provider_type: remote::bing-search
@@ -114,6 +116,12 @@ providers:
     - provider_id: model-context-protocol
       provider_type: remote::model-context-protocol
       config: {}
+
+  scoring:
+    - provider_id: basic
+      provider_type: inline::basic
+    - provider_id: llm-as-judge
+      provider_type: inline::llm-as-judge
 
 # storage providers
 storage:
@@ -139,7 +147,9 @@ storage:
     prompts:
       namespace: prompts
       backend: kv_default
-
+    connectors:
+      namespace: connectors
+      backend: kv_default
 
 # stack resources
 registered_resources:
