@@ -15,6 +15,14 @@ apis:
 - scoring
 - tool_runtime
 - vector_io
+- connectors
+
+# connectors Configuration
+connectors:
+  - connector_id: "mcp::demoserver"
+    server_label: "Demo MCP Server"
+    connector_type: mcp
+    url: "http://localhost:8000/sse"
 
 # Provider Configuration
 providers:
