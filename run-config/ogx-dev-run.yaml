@@ -1,18 +1,16 @@
-## LLAMA-STACK Distribution Descriptor
+## OGX Distribution Descriptor
 version: '2'
-image_name: lls-dev-stack
+image_name: ogx-dev-stack
 
 # Enabled APIs
 apis:
 - admin
 - responses
-- datasetio
 - eval
 - files
 - file_processors
 - inference
 - safety
-- scoring
 - tool_runtime
 - vector_io
 - connectors
@@ -49,7 +47,7 @@ providers:
     - provider_id: inline-chromadb
       provider_type: inline::chromadb
       config:
-        db_path: ${env.CHROMA_DB_PATH:=~/.llama/distributions/lls-dev-stack}/chromadb.db
+        db_path: ${env.CHROMA_DB_PATH:=~/.ogx/distributions/ogx-dev-stack}/chromadb.db
         persistence:
           namespace: vector_io::chromadb
           backend: kv_default
@@ -74,7 +72,7 @@ providers:
     - provider_type: inline::localfs
       provider_id: llama-localfs
       config:
-        storage_dir: ${env.LOCAL_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack}/localfs
+        storage_dir: ${env.LOCAL_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack}/localfs
         metadata_store:
           backend: sql_default
           table_name: files_metadata
@@ -99,21 +97,6 @@ providers:
             max_write_queue_size: 10000
             num_writers: 4
 
-  # Dataset IO Providers
-  datasetio:
-    - provider_id: huggingface
-      provider_type: remote::huggingface
-      config:
-        kvstore:
-          namespace: datasetio::huggingface
-          backend: kv_default
-    - provider_id: localfs
-      provider_type: inline::localfs
-      config:
-        kvstore:
-          backend: kv_default
-          namespace: datasetio::localfs
-
   tool_runtime:
     - provider_id: file-search
       provider_type: inline::file-search
@@ -125,21 +108,15 @@ providers:
       provider_type: remote::model-context-protocol
       config: {}
 
-  scoring:
-    - provider_id: basic
-      provider_type: inline::basic
-    - provider_id: llm-as-judge
-      provider_type: inline::llm-as-judge
-
 # storage providers
 storage:
   backends:
     kv_default:
       type: kv_sqlite
-      db_path: ${env.SQLITE_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack/storage}/kv_default.db
+      db_path: ${env.SQLITE_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack/storage}/kv_default.db
     sql_default:
       type: sql_sqlite
-      db_path: ${env.SQLITE_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack/storage}/sql_default.db
+      db_path: ${env.SQLITE_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack/storage}/sql_default.db
   stores:
     metadata:
       backend: kv_default
@@ -173,7 +150,6 @@ registered_resources:
       provider_shield_id: code-scanner
 
   vector_dbs: []
-  datasets: []
 
   # TOOLS
   tool_groups:
