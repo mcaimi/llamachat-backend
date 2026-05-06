@@ -1,19 +1,26 @@
-## LLAMA-STACK Distribution Descriptor
+## OGX Distribution Descriptor
 version: '2'
-image_name: lls-dev-stack
+image_name: ogx-dev-stack
 
 # Enabled APIs
 apis:
 - admin
-- agents
-- datasetio
+- responses
 - eval
 - files
+- file_processors
 - inference
 - safety
-- scoring
 - tool_runtime
 - vector_io
+- connectors
+
+# connectors Configuration
+connectors:
+  - connector_id: "mcp::demoserver"
+    server_label: "Demo MCP Server"
+    connector_type: mcp
+    url: "http://localhost:8000/sse"
 
 # Provider Configuration
 providers:
@@ -37,12 +44,12 @@ providers:
 
   # Vector IO Providers
   vector_io:
-    - provider_id: inline-milvus
-      provider_type: inline::milvus
+    - provider_id: inline-chromadb
+      provider_type: inline::chromadb
       config:
-        db_path: ${env.MILVUS_DB_PATH:=~/.llama/distributions/lls-dev-stack}/milvus.db
+        db_path: ${env.CHROMA_DB_PATH:=~/.ogx/distributions/ogx-dev-stack}/chromadb.db
         persistence:
-          namespace: vector_io::milvus
+          namespace: vector_io::chromadb
           backend: kv_default
     - provider_id: inline-faiss
       provider_type: inline::faiss
@@ -59,54 +66,40 @@ providers:
         excluded_categories: []
     - provider_id: code-scanner
       provider_type: inline::code-scanner
-#    - provider_id: prompt-guard
-#      provider_type: inline::prompt-guard
-#      config:
-#        guard_type: injection
-#
+ 
   # Files Backend
   files:
     - provider_type: inline::localfs
       provider_id: llama-localfs
       config:
-        storage_dir: ${env.LOCAL_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack}/localfs
+        storage_dir: ${env.LOCAL_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack}/localfs
         metadata_store:
           backend: sql_default
           table_name: files_metadata
 
+  # file processors
+  file_processors:
+    - provider_id: pypdf
+      provider_type: inline::pypdf
+
   # Agentic Backend Provider
-  agents:
-    - provider_id: meta-reference
-      provider_type: inline::meta-reference
+  responses:
+    - provider_id: builtin
+      provider_type: inline::builtin
       config:
         persistence:
           agent_state:
-            backend: kv_default
             namespace: agents
+            backend: kv_default
           responses:
-            backend: sql_default
             table_name: responses
+            backend: sql_default
             max_write_queue_size: 10000
             num_writers: 4
 
-  # Dataset IO Providers
-  datasetio:
-    - provider_id: huggingface
-      provider_type: remote::huggingface
-      config:
-        kvstore:
-          namespace: datasetio::huggingface
-          backend: kv_default
-    - provider_id: localfs
-      provider_type: inline::localfs
-      config:
-        kvstore:
-          backend: kv_default
-          namespace: datasetio::localfs
-
   tool_runtime:
-    - provider_id: rag-runtime
-      provider_type: inline::rag-runtime
+    - provider_id: file-search
+      provider_type: inline::file-search
       config: {}
     - provider_id: web-search
       provider_type: remote::bing-search
@@ -120,10 +113,10 @@ storage:
   backends:
     kv_default:
       type: kv_sqlite
-      db_path: ${env.SQLITE_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack/storage}/kv_default.db
+      db_path: ${env.SQLITE_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack/storage}/kv_default.db
     sql_default:
       type: sql_sqlite
-      db_path: ${env.SQLITE_STORAGE_DIR:=~/.llama/distributions/lls-dev-stack/storage}/sql_default.db
+      db_path: ${env.SQLITE_STORAGE_DIR:=~/.ogx/distributions/ogx-dev-stack/storage}/sql_default.db
   stores:
     metadata:
       backend: kv_default
@@ -139,7 +132,9 @@ storage:
     prompts:
       namespace: prompts
       backend: kv_default
-
+    connectors:
+      namespace: connectors
+      backend: kv_default
 
 # stack resources
 registered_resources:
@@ -155,7 +150,6 @@ registered_resources:
       provider_shield_id: code-scanner
 
   vector_dbs: []
-  datasets: []
 
   # TOOLS
   tool_groups:
