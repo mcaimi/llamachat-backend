@@ -42,13 +42,6 @@ providers:
 
   # Vector IO Providers
   vector_io:
-    - provider_id: inline-milvus
-      provider_type: inline::milvus
-      config:
-        db_path: ${env.MILVUS_DB_PATH:=~/.ogx/distributions/ogx-dev-stack}/milvus.db
-        persistence:
-          namespace: vector_io::milvus
-          backend: kv_default
     - provider_id: inline-faiss
       provider_type: inline::faiss
       config:
