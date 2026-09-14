@@ -24,6 +24,10 @@ $ uv run ogx stack build --template starter --image-type venv --config llama-sta
 $ uv run ogx stack run --image-type venv llama-stack-config.yaml
 ```
 
+## A word on default config
+
+- The run config provided is an example of how to build an OGX installation
+- It is really suggested to add your own providers (e.g. llama-cpp, ollama, vLLM, OpenAI...) and your own vector DB (faiss is not really production ready)
 
 # TODO
 
