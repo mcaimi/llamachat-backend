@@ -1,16 +1,14 @@
 ## OGX Distribution Descriptor
 version: '2'
-image_name: ogx-dev-stack
+distro_name: ogx-dev-stack
 
 # Enabled APIs
 apis:
 - admin
 - responses
-- eval
 - files
 - file_processors
 - inference
-- safety
 - tool_runtime
 - vector_io
 - connectors
@@ -44,12 +42,12 @@ providers:
 
   # Vector IO Providers
   vector_io:
-    - provider_id: inline-chromadb
-      provider_type: inline::chromadb
+    - provider_id: inline-milvus
+      provider_type: inline::milvus
       config:
-        db_path: ${env.CHROMA_DB_PATH:=~/.ogx/distributions/ogx-dev-stack}/chromadb.db
+        db_path: ${env.MILVUS_DB_PATH:=~/.ogx/distributions/ogx-dev-stack}/milvus.db
         persistence:
-          namespace: vector_io::chromadb
+          namespace: vector_io::milvus
           backend: kv_default
     - provider_id: inline-faiss
       provider_type: inline::faiss
@@ -58,15 +56,6 @@ providers:
           namespace: vector_io::faiss
           backend: kv_default
 
-  # Safety Providers
-  safety:
-    - provider_id: llama-guard
-      provider_type: inline::llama-guard
-      config:
-        excluded_categories: []
-    - provider_id: code-scanner
-      provider_type: inline::code-scanner
- 
   # Files Backend
   files:
     - provider_type: inline::localfs
@@ -127,7 +116,7 @@ storage:
       max_write_queue_size: 10000
       num_writers: 4
     conversations:
-      table_name: llm_conversations
+      table_name: openai_conversations
       backend: sql_default
     prompts:
       namespace: prompts
@@ -140,14 +129,6 @@ storage:
 registered_resources:
   # available models
   models: []
-
-  shields:
-    - shield_id: LlamaGuard-3
-      provider_id: llama-guard
-      provider_shield_id: ${env.SAFETY_MODEL_OLLAMA:=llama-guard3:1b}
-    - shield_id: CodeScanner
-      provider_id: code-scanner
-      provider_shield_id: code-scanner
 
   vector_dbs: []
 
@@ -168,9 +149,6 @@ vector_stores:
   default_embedding_model:
     provider_id: ollama
     model_id: nomic-embed-text:latest
-
-safety:
-  default_shield_id: LlamaGuard-3
 
 # ENDPOINT SETTINGS
 server:
