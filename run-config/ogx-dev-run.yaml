@@ -1,12 +1,11 @@
 ## OGX Distribution Descriptor
 version: '2'
-image_name: ogx-dev-stack
+distro_name: ogx-dev-stack
 
 # Enabled APIs
 apis:
 - admin
 - responses
-- eval
 - files
 - file_processors
 - inference
@@ -117,7 +116,7 @@ storage:
       max_write_queue_size: 10000
       num_writers: 4
     conversations:
-      table_name: llm_conversations
+      table_name: openai_conversations
       backend: sql_default
     prompts:
       namespace: prompts

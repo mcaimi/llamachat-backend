@@ -5,11 +5,12 @@ description = "My custom llama-stack distribution descriptor file"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "chardet>=7.1.0",
+  "chardet>=3.0,<6.0.0",
   "faiss-cpu>=1.13.2",
-  "ogx==0.8.0",
-  "ogx-api==0.8.0",
+  "ogx==1.4.0",
+  "ogx-api==1.4.0",
   "ollama>=0.6.1",
+  "protobuf>=5.29,<6",
   "pymilvus[milvus-lite]>=3.0.0",
   "pypdf>=6.9.0",
   "torch>=2.10.0",
